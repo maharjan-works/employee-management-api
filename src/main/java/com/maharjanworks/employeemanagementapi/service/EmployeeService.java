@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface EmployeeService {
 
-    public Employee saveEmployee(Employee employee);
-    public List<Employee> findAllEmployees();
-    public Employee findEmployeeById(Long employeeId) throws ResourceNotFoundException;
+    Employee saveEmployee(Employee employee);
+    List<Employee> findAllEmployees();
+    public Employee findEmployeeById(String employeeId) throws ResourceNotFoundException;
     public Employee updateEmployee(Employee employee);
-    public String deleteEmployeeById(Long employeeId);
+    public String deleteEmployeeById(String employeeId);
 
  }

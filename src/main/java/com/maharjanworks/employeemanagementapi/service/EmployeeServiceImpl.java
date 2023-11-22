@@ -25,10 +25,10 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
-    public Employee findEmployeeById(Long employeeId) throws ResourceNotFoundException {
+    public Employee findEmployeeById(String employeeId) throws ResourceNotFoundException {
         if (this.employeeRepository.findById(employeeId).isPresent())
             return this.employeeRepository.findById(employeeId).get();
-        throw new ResourceNotFoundException("No Record Exists.");
+        throw new ResourceNotFoundException("Record not exists");
     }
 
     @Override
@@ -37,7 +37,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
-    public String deleteEmployeeById(Long employeeId) {
+    public String deleteEmployeeById(String employeeId) {
         this.employeeRepository.deleteById(employeeId);
         return "Success";
     }
