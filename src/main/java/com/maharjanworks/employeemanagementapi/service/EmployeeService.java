@@ -9,8 +9,8 @@ public interface EmployeeService {
 
     Employee saveEmployee(Employee employee);
     List<Employee> findAllEmployees();
-    public Employee findEmployeeById(String employeeId) throws ResourceNotFoundException;
-    public Employee updateEmployee(Employee employee);
+    public Employee findEmployeeById(String employeeId);
+    public Employee updateEmployee(String employeeId, Employee newEmployeeDetails);
     public String deleteEmployeeById(String employeeId);
 
  }

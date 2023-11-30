@@ -25,15 +25,24 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
-    public Employee findEmployeeById(String employeeId) throws ResourceNotFoundException {
-        if (this.employeeRepository.findById(employeeId).isPresent())
-            return this.employeeRepository.findById(employeeId).get();
-        throw new ResourceNotFoundException("Record not exists");
+    public Employee findEmployeeById(String employeeId)  {
+//        if (this.employeeRepository.findById(employeeId).isPresent())
+//            return this.employeeRepository.findById(employeeId).get();
+//        throw new ResourceNotFoundException("Record not exists");
+
+        return this.employeeRepository.findById(employeeId)
+                .orElseThrow(()-> new ResourceNotFoundException("Employee not exist with id: "+ employeeId));
     }
 
     @Override
-    public Employee updateEmployee(Employee employee) {
-        return this.employeeRepository.save(employee);
+    public Employee updateEmployee(String employeeId, Employee newEmployeeDetails) {
+        Employee dbEmployee = this.employeeRepository.findById(employeeId)
+                .orElseThrow(()-> new ResourceNotFoundException("Employee not exist with id: "+ employeeId));
+
+        dbEmployee.setFirstName(newEmployeeDetails.getFirstName());
+        dbEmployee.setLastName(newEmployeeDetails.getLastName());
+        dbEmployee.setEmailId(newEmployeeDetails.getEmailId());
+        return this.employeeRepository.save(dbEmployee);
     }
 
     @Override
