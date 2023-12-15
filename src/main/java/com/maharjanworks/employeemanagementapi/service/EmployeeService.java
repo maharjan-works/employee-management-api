@@ -4,6 +4,7 @@ import com.maharjanworks.employeemanagementapi.exception.ResourceNotFoundExcepti
 import com.maharjanworks.employeemanagementapi.model.Employee;
 
 import java.util.List;
+import java.util.Map;
 
 public interface EmployeeService {
 
@@ -11,6 +12,6 @@ public interface EmployeeService {
     List<Employee> findAllEmployees();
     public Employee findEmployeeById(String employeeId);
     public Employee updateEmployee(String employeeId, Employee newEmployeeDetails);
-    public String deleteEmployeeById(String employeeId);
+    public Map<String, Boolean> deleteEmployeeById(String employeeId);
 
  }

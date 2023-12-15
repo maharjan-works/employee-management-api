@@ -3,10 +3,13 @@ package com.maharjanworks.employeemanagementapi.service;
 import com.maharjanworks.employeemanagementapi.exception.ResourceNotFoundException;
 import com.maharjanworks.employeemanagementapi.model.Employee;
 import com.maharjanworks.employeemanagementapi.repository.EmployeeRepository;
+import javafx.beans.binding.BooleanExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService{
@@ -46,8 +49,13 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
-    public String deleteEmployeeById(String employeeId) {
-        this.employeeRepository.deleteById(employeeId);
-        return "Success";
+    public Map<String, Boolean> deleteEmployeeById(String employeeId) {
+        Employee employee = this.employeeRepository.findById(employeeId)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not exits with id: " + employeeId));
+
+        this.employeeRepository.delete(employee);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", Boolean.TRUE);
+        return response;
     }
 }
