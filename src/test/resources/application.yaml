@@ -1,0 +1,17 @@
+# MySQL database settings
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/employee_mgmt_test_db?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false
+    username: root
+    password: root
+
+# SQL dialect
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+#JPA Setting
+    hibernate:
+      ddl_auto: update
+    show: true
