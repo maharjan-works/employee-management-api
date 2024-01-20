@@ -3,7 +3,6 @@ package com.maharjanworks.employeemanagementapi.service;
 import com.maharjanworks.employeemanagementapi.exception.ResourceNotFoundException;
 import com.maharjanworks.employeemanagementapi.model.Employee;
 import com.maharjanworks.employeemanagementapi.repository.EmployeeRepository;
-import javafx.beans.binding.BooleanExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,10 +28,6 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public Employee findEmployeeById(String employeeId)  {
-//        if (this.employeeRepository.findById(employeeId).isPresent())
-//            return this.employeeRepository.findById(employeeId).get();
-//        throw new ResourceNotFoundException("Record not exists");
-
         return this.employeeRepository.findById(employeeId)
                 .orElseThrow(()-> new ResourceNotFoundException("Employee not exist with id: "+ employeeId));
     }

@@ -3,6 +3,7 @@ package com.maharjanworks.employeemanagementapi.controller;
 import com.maharjanworks.employeemanagementapi.model.Employee;
 import com.maharjanworks.employeemanagementapi.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,13 +19,13 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @PostMapping
-    public Employee saveEmployee(@RequestBody Employee employee){
-        return this.employeeService.saveEmployee(employee);
+    public ResponseEntity<Employee> saveEmployee(@RequestBody Employee employee){
+        return new ResponseEntity<>(this.employeeService.saveEmployee(employee), HttpStatus.CREATED);
     }
 
     @GetMapping
-    public List<Employee> findAllEmployees(){
-        return this.employeeService.findAllEmployees();
+    public ResponseEntity<List<Employee>> findAllEmployees(){
+        return new ResponseEntity<>(this.employeeService.findAllEmployees(),HttpStatus.OK);
     }
 
     @GetMapping("/{employeeId}")
@@ -38,7 +39,7 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/{employeeId}")
-    public ResponseEntity<Map<String, Boolean>>deleteEmployeeId(@PathVariable("employeeId") String employeeId){
+    public ResponseEntity<Map<String, Boolean>> deleteEmployeeId(@PathVariable("employeeId") String employeeId){
         return ResponseEntity.ok(this.employeeService.deleteEmployeeById(employeeId));
     }
 
